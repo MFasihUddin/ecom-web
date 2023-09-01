@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 
-const Products = () => {
-  return <Wrapper></Wrapper>;
-};
+function Products() {
+  return <h1>Products</h1>;
+}
 
 const Wrapper = styled.section`
   .grid-filter-column {

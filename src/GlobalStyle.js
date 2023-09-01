@@ -9,7 +9,6 @@ export const GlobalStyle = createGlobalStyle`
   font-family: "Work Sans", sans-serif;
 }
 
-
 html {
   font-size: 62.5%;
   /* scroll-behavior: smooth; */
@@ -152,22 +151,26 @@ input, textarea{
     padding: 1.4rem 2.2rem;
     border-style: solid;
     border-width: .1rem;
-    text-transform: uppercase;
+    text-transform: uppercase;]
     font-size: 1.8rem;
     cursor: pointer;
     }
 
-@media (max-width: ${({ theme }) => theme.media.tab}) {
+ ${
+   ""
+   /*@media (max-width: ${({ theme }) => theme.media.tab}) {
     .container {
     max-width: 130rem;
     padding: 0 3.2rem;
   }
   }
 
-   @media (max-width: ${({ theme }) => theme.media.mobile}) {
-       html {
-      font-size: 50%;
-    }
+@media (max-width: ${({ theme }) => theme.media.mobile}) {
+    html {
+    font-size: 50%;
+  }
+}*/
+ }
 
 .grid{
   gap: 3.2rem;
