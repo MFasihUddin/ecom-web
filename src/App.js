@@ -10,7 +10,8 @@ import Error from "./Error";
 import { GlobalStyle } from "./GlobalStyle";
 import { ThemeProvider } from "styled-components";
 import Header from "./components/Header";
-import Footer from './components/Footer';
+import Footer from "./components/Footer";
+import { ProductProvider } from "./context/ProductProvider";
 
 const App = () => {
   const theme = {
@@ -38,22 +39,24 @@ const App = () => {
     },
   };
   return (
-    <ThemeProvider theme={theme}>
-      <Router>
-        <GlobalStyle />
-        <Header />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/products" element={<Products />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/detail/:id" element={<SingleProduct />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="*" element={<Error />} />
-        </Routes>
-        <Footer/>
-      </Router>
-    </ThemeProvider>
+    <ProductProvider>
+      <ThemeProvider theme={theme}>
+        <Router>
+          <GlobalStyle />
+          <Header />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/products" element={<Products />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/detail/:id" element={<SingleProduct />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="*" element={<Error />} />
+          </Routes>
+          <Footer />
+        </Router>
+      </ThemeProvider>
+    </ProductProvider>
   );
 };
 
