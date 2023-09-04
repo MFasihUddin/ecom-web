@@ -1,14 +1,12 @@
 import React, { useState } from "react";
-import styled from "styled-components";
 import { NavLink } from "react-router-dom";
+import styled from "styled-components";
 import { FiShoppingCart } from "react-icons/fi";
 import { CgMenu, CgClose } from "react-icons/cg";
 
-function Nav() {
+const Navbar = () => {
   const [menuIcon, setMenuIcon] = useState();
-  const handleClick = () => {
-    setMenuIcon(false);
-  };
+
   const Nav = styled.nav`
     .navbar-lists {
       display: flex;
@@ -26,29 +24,24 @@ function Nav() {
           color: ${({ theme }) => theme.colors.black};
           transition: color 0.3s linear;
         }
-
         &:hover,
         &:active {
           color: ${({ theme }) => theme.colors.helper};
         }
       }
     }
-
     .mobile-navbar-btn {
       display: none;
       background-color: transparent;
       cursor: pointer;
-      border: none;
+      border: ${({ theme }) => theme.colors.black};
     }
-
     .mobile-nav-icon[name="close-outline"] {
       display: none;
     }
-
     .close-outline {
       display: none;
     }
-
     .cart-trolley--link {
       position: relative;
 
@@ -56,7 +49,6 @@ function Nav() {
         position: relative;
         font-size: 3.2rem;
       }
-
       .cart-total--item {
         width: 2.4rem;
         height: 2.4rem;
@@ -71,17 +63,14 @@ function Nav() {
         background-color: ${({ theme }) => theme.colors.helper};
       }
     }
-
     .user-login--name {
       text-transform: capitalize;
     }
-
     .user-logout,
     .user-login {
       font-size: 1.4rem;
       padding: 0.8rem 1.4rem;
     }
-
     @media (max-width: ${({ theme }) => theme.media.mobile}) {
       .mobile-navbar-btn {
         display: inline-block;
@@ -103,11 +92,9 @@ function Nav() {
         color: ${({ theme }) => theme.colors.black};
         z-index: 9999;
       }
-
-      .active .close-outline {
+      .active .clone-outline {
         display: inline-block;
       }
-
       .navbar-lists {
         width: 100vw;
         height: 100vh;
@@ -124,10 +111,8 @@ function Nav() {
         visibility: hidden;
         opacity: 0;
         transform: translateX(100%);
-        /* transform-origin: top; */
         transition: all 3s linear;
       }
-
       .active .navbar-lists {
         visibility: visible;
         opacity: 1;
@@ -157,29 +142,38 @@ function Nav() {
 
       .user-logout,
       .user-login {
-        font-size: 2.2rem;
+        font-size: 2rem;
         padding: 0.8rem 1.4rem;
       }
     }
   `;
+
   return (
     <Nav>
       <div className={menuIcon ? "navbar active" : "navbar"}>
         <ul className="navbar-lists">
           <li>
-            <NavLink to="/" className="navbar-link" onClick={handleClick}>
+            <NavLink
+              to="/"
+              className="navbar-link "
+              onClick={() => setMenuIcon(false)}
+            >
               Home
             </NavLink>
           </li>
           <li>
-            <NavLink to="/about" className="navbar-link" onClick={handleClick}>
+            <NavLink
+              to="/about"
+              className="navbar-link "
+              onClick={() => setMenuIcon(false)}
+            >
               About
             </NavLink>
           </li>
           <li>
             <NavLink
               to="/products"
-              className="navbar-link"
+              className="navbar-link "
               onClick={() => setMenuIcon(false)}
             >
               Products
@@ -188,28 +182,21 @@ function Nav() {
           <li>
             <NavLink
               to="/contact"
-              className="navbar-link"
-              onClick={handleClick}
+              className="navbar-link "
+              onClick={() => setMenuIcon(false)}
             >
               Contact
             </NavLink>
           </li>
           <li>
-            <NavLink to="" className="navbar-link" onClick={handleClick}>
-              Login
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/cart"
-              className="navbar-link cart-trolley--link"
-              onClick={handleClick}
-            >
+            <NavLink to="/cart" className="navbar-link cart-trolley--link">
               <FiShoppingCart className="cart-trolley" />
-              <span className="cart-total--item">10</span>
+              <span className="cart-total--item"> 10 </span>
             </NavLink>
           </li>
         </ul>
+
+        {/* two button for open and close of menu */}
         <div className="mobile-navbar-btn">
           <CgMenu
             name="menu-outline"
@@ -219,12 +206,12 @@ function Nav() {
           <CgClose
             name="close-outline"
             className="mobile-nav-icon close-outline"
-            onClick={handleClick}
+            onClick={() => setMenuIcon(false)}
           />
         </div>
       </div>
     </Nav>
   );
-}
+};
 
-export default Nav;
+export default Navbar;
