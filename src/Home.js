@@ -4,8 +4,8 @@ import Trusted from "./components/Trusted";
 import { useProductHook } from "./context/ProductProvider";
 
 function Home() {
-  const { info } = useProductHook();
-  console.log(info.name);
+  const { state } = useProductHook();
+
   const data = {
     name: "Fasih Store",
   };

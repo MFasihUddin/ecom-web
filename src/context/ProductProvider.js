@@ -6,10 +6,10 @@ const ProductContext = createContext();
 const API = "https://api.pujakaitem.com/api/products";
 
 const initialVal = {
-  isfeature: false,
+  isLoading: false,
   isError: false,
   products: [],
-  featureProduct: [],
+  featureProducts: [],
 };
 
 function ProductProvider({ children }) {
@@ -20,17 +20,16 @@ function ProductProvider({ children }) {
   }, []);
 
   const getData = async (url) => {
-    dispatch({ type: "API_LOADING" });
+    dispatch({ type: "SET_LOADING" });
     try {
       const res = await axios.get(url);
       const product = await res.data;
-      dispatch({ type: "API_DATA", payload: product });
+      dispatch({ type: "SET_API_DATA", payload: product });
     } catch (error) {
       dispatch({ type: "API_ERROR" });
     }
   };
 
-  const info = { name: "fasih" };
   return (
     <ProductContext.Provider value={{ ...state }}>
       {children}
