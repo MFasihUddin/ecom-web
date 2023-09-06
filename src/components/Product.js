@@ -1,10 +1,10 @@
 import { NavLink } from "react-router-dom";
+import PriceFormat from "../Helper/PriceFormat";
 
 function Product(item) {
   const { id, name, image, price, category } = item;
-  console.log(item)
   return (
-    <NavLink to={`/singleProduct/:${id}`}>
+    <NavLink to={`/singleProduct/${id}`}>
       <div className="card">
         <figure>
           <img src={image} alt={name} />
@@ -14,7 +14,7 @@ function Product(item) {
         <div className="card-data">
           <div className="card-data-flex">
             <h3>{name}</h3>
-            <p className="card-data--price">{price}</p>
+            <p className="card-data--price">{<PriceFormat price={price} />}</p>
           </div>
         </div>
       </div>

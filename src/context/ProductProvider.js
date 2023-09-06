@@ -10,6 +10,8 @@ const initialVal = {
   isError: false,
   products: [],
   featureProducts: [],
+  isSingleLoading: false,
+  singleProduct: {},
 };
 
 function ProductProvider({ children }) {
@@ -19,6 +21,7 @@ function ProductProvider({ children }) {
     getData(API);
   }, []);
 
+  //get All Product
   const getData = async (url) => {
     dispatch({ type: "SET_LOADING" });
     try {
@@ -30,8 +33,20 @@ function ProductProvider({ children }) {
     }
   };
 
+  //get SingleProduct
+  const getSingleProduct = async (url) => {
+    dispatch({ type: "SET_SINGLE_LOADING" });
+    try {
+      const res = await axios.get(url);
+      const singleProduct = await res.data;
+      dispatch({ type: "SET_SINGLE_PRODUCT", payload: singleProduct });
+    } catch (error) {
+      dispatch({ type: "SET_SINGLE_ERROR" });
+    }
+  };
+
   return (
-    <ProductContext.Provider value={{ ...state }}>
+    <ProductContext.Provider value={{ ...state, getSingleProduct }}>
       {children}
     </ProductContext.Provider>
   );

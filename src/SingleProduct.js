@@ -1,6 +1,18 @@
+import { useEffect } from "react";
 import styled from "styled-components";
+import { useParams } from "react-router-dom";
+import { useProductHook } from "./context/ProductProvider";
+
+const API = "https://api.pujakaitem.com/api/products";
 
 const SingleProduct = () => {
+  const { id } = useParams();
+  const { getSingleProduct } = useProductHook();
+  
+
+  useEffect(() => {
+    getSingleProduct(`${API}/${id}`);
+  }, []);
   return (
     <>
       <h1>SingleProduct</h1>
