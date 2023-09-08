@@ -12,11 +12,12 @@ import { TbTruckDelivery, TbReplace } from "react-icons/tb";
 const API = "https://api.pujakaitem.com/api/products";
 
 const SingleProduct = () => {
-  const { id } = useParams();
-  console.log(useParams());
   const { getSingleProduct, isSingleLoading, singleProduct } = useProductHook();
 
+  const { id } = useParams();
+
   const {
+    id: alias,
     name,
     company,
     price,
@@ -24,8 +25,8 @@ const SingleProduct = () => {
     category,
     stock,
     stars,
-    image,
     reviews,
+    image,
   } = singleProduct;
 
   useEffect(() => {
@@ -33,8 +34,9 @@ const SingleProduct = () => {
   }, []);
 
   if (isSingleLoading) {
-    <div className="page_loading">Loading....</div>;
+    return <div className="page_loading">Loading.....</div>;
   }
+
   return (
     <Wrapper>
       <PageNavigation title={name} />
@@ -45,11 +47,10 @@ const SingleProduct = () => {
             <MyImage imgs={image} />
           </div>
 
-          {/* product data  */}
+          {/* product dAta  */}
           <div className="product-data">
             <h2>{name}</h2>
-            <p>{stars}</p>
-            <p>{reviews} reviews</p>
+
             <p className="product-data-price">
               MRP:
               <del>
@@ -105,6 +106,12 @@ const Wrapper = styled.section`
   .container {
     padding: 9rem 0;
   }
+
+  .product_images {
+    display: flex;
+    align-items: center;
+  }
+
   .product-data {
     display: flex;
     flex-direction: column;
@@ -169,6 +176,12 @@ const Wrapper = styled.section`
     align-items: center;
   }
 
+  .page_loading {
+    font-size: 3.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
   @media (max-width: ${({ theme }) => theme.media.mobile}) {
     padding: 0 2.4rem;
   }
