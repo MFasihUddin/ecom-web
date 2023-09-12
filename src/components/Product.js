@@ -1,8 +1,11 @@
 import { NavLink } from "react-router-dom";
 import PriceFormat from "../Helper/PriceFormat";
+import { useFilterContext } from "../context/FilterContextProvider";
 
 function Product(item) {
   const { id, name, image, price, category } = item;
+  const { filter_products } = useFilterContext();
+  console.log(filter_products);
   return (
     <NavLink to={`/singleProduct/${id}`}>
       <div className="card">
