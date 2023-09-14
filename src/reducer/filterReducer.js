@@ -11,15 +11,17 @@ const filterReducer = (state, action) => {
         ...state,
         display_view: !state.display_view,
       };
+    case "GET_SORTING_VALUE":
+      let select_value = document.getElementById("sort");
+      let sort_value = select_value.options[select_value.selectedIndex].value;
+      return {
+        ...state,
+        sorting_value: sort_value,
+      };
+
     default:
       return state;
   }
 };
 
 export default filterReducer;
-
-// case "SET_GRID_VIEW":
-//       return {
-//         ...state,
-//         grid_view: true,
-//       };
