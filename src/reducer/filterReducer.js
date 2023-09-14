@@ -6,10 +6,10 @@ const filterReducer = (state, action) => {
         filter_products: [...action.payload],
         all_products: [...action.payload],
       };
-    case "SET_GRID_VIEW":
+    case "SET_DISPLAY_VIEW":
       return {
         ...state,
-        grid_view: true,
+        display_view: !state.display_view,
       };
     default:
       return state;
@@ -17,3 +17,9 @@ const filterReducer = (state, action) => {
 };
 
 export default filterReducer;
+
+// case "SET_GRID_VIEW":
+//       return {
+//         ...state,
+//         grid_view: true,
+//       };

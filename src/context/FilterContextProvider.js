@@ -7,16 +7,16 @@ const FilterContext = createContext();
 const initialVal = {
   filter_products: [],
   all_products: [],
-  grid_view: true,
+  display_view: false,
 };
 
 function FilterContextProvider({ children }) {
   const { products } = useProductHook();
   const [state, dispatch] = useReducer(reducer, initialVal);
 
-  // set Grid View...
-  const setGridView = () => {
-    return dispatch({ type: "SET_GRID_VIEW" });
+  // set Grid VS List View...
+  const setDisplayView = () => {
+    return dispatch({ type: "SET_DISPLAY_VIEW" });
   };
 
   useEffect(() => {
@@ -24,7 +24,7 @@ function FilterContextProvider({ children }) {
   }, [products]);
 
   return (
-    <FilterContext.Provider value={{ ...state, setGridView }}>
+    <FilterContext.Provider value={{ ...state, setDisplayView }}>
       {children}
     </FilterContext.Provider>
   );
