@@ -7,7 +7,7 @@ const FilterContext = createContext();
 const initialVal = {
   filter_products: [],
   all_products: [],
-  display_view: false,
+  display_view: true,
   sorting_value: "lowest",
 };
 
@@ -27,7 +27,7 @@ function FilterContextProvider({ children }) {
 
   //sorting api call
   useEffect(() => {
-    console.log("hi");
+    dispatch({ type: "SORTING_PRODUCTS", payload: products });
   }, [state.sorting_value]);
 
   useEffect(() => {
