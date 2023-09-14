@@ -5,7 +5,7 @@ import styled from "styled-components";
 function GridView({ products }) {
   return (
     <Wrapper className="section">
-      <div className="container grid grid-three-cloumn">
+      <div className="container grid grid-three-column">
         {products.map((item, index) => (
           <Product key={item.id} {...item} />
         ))}
