@@ -6,34 +6,39 @@ const filterReducer = (state, action) => {
         filter_products: [...action.payload],
         all_products: [...action.payload],
       };
+
     case "SET_DISPLAY_VIEW":
       return {
         ...state,
         display_view: !state.display_view,
       };
+
     case "GET_SORTING_VALUE":
-      let select_value = document.getElementById("sort");
-      let sort_value = select_value.options[select_value.selectedIndex].value;
       return {
         ...state,
-        sorting_value: sort_value,
+        sorting_value: action.payload,
       };
+
     case "SORTING_PRODUCTS":
-      let newSortData;
-      let temp_Products = [...action.payload];
-      if (state.sorting_value === "a-z") {
-        newSortData = temp_Products.sort((a, b) => {
-          a.name.localeCompare(b.name);
-        });
-      } else if (state.sorting_value === "z-a") {
-        newSortData = temp_Products.sort((a, b) =>
-          b.name.localeCompare(a.name)
-        );
-      } else if (state.sorting_value === "lowest") {
-        newSortData = temp_Products.sort((a, b) => a.price - b.price);
-      } else if (state.sorting_value === "highest") {
-        newSortData = temp_Products.sort((a, b) => b.price - a.price);
-      }
+      const { filter_products, sorting_value } = state;
+      let temp_Products = [...filter_products];
+
+      const sorting_data = (a, b) => {
+        if (sorting_value === "lowest") {
+          return a.price - b.price;
+        }
+        if (sorting_value === "highest") {
+          return b.price - a.price;
+        }
+        if (sorting_value === "a-z") {
+          return a.name.localeCompare(b.name);
+        }
+        if (sorting_value === "z-a") {
+          return b.name.localeCompare(a.name);
+        }
+      };
+
+      const newSortData = temp_Products.sort(sorting_data);
       return {
         ...state,
         filter_products: newSortData,
@@ -45,3 +50,5 @@ const filterReducer = (state, action) => {
 };
 
 export default filterReducer;
+
+// 0345-9006483 iftikhar

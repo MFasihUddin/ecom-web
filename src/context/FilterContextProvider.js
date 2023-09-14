@@ -21,13 +21,14 @@ function FilterContextProvider({ children }) {
   };
 
   //sorting Function
-  const sorting = () => {
-    return dispatch({ type: "GET_SORTING_VALUE" });
+  const sorting = (event) => {
+    const sort_value = event.target.value;
+    return dispatch({ type: "GET_SORTING_VALUE", payload: sort_value });
   };
 
   //sorting api call
   useEffect(() => {
-    dispatch({ type: "SORTING_PRODUCTS", payload: products });
+    dispatch({ type: "SORTING_PRODUCTS" });
   }, [state.sorting_value]);
 
   useEffect(() => {

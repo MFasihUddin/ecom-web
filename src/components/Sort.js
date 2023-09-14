@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 import { BsFillGridFill, BsList } from "react-icons/bs";
 import { useFilterContext } from "../context/FilterContextProvider";
@@ -6,6 +5,7 @@ import { useFilterContext } from "../context/FilterContextProvider";
 function Sort() {
   const { display_view, setDisplayView, filter_products, sorting } =
     useFilterContext();
+
   return (
     <Wrapper className="sort-section">
       {/* First Cloumn */}
