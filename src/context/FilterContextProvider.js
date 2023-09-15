@@ -9,6 +9,9 @@ const initialVal = {
   all_products: [],
   display_view: true,
   sorting_value: "lowest",
+  filters: {
+    text: "",
+  },
 };
 
 function FilterContextProvider({ children }) {
@@ -26,17 +29,31 @@ function FilterContextProvider({ children }) {
     return dispatch({ type: "GET_SORTING_VALUE", payload: sort_value });
   };
 
+  // Search Input Method...
+  const updateFilterValue = (event) => {
+    let name = event.target.name;
+    let value = event.target.value;
+
+    return dispatch({
+      type: "UPDATE_FILTER_SEARCH_VALUE",
+      payload: { name, value },
+    });
+  };
+
   //sorting api call
   useEffect(() => {
+    dispatch({ type: "SEARCH_PRODUCTS" });
     dispatch({ type: "SORTING_PRODUCTS" });
-  }, [state.sorting_value]);
+  }, [products, state.sorting_value, state.filters]);
 
   useEffect(() => {
     dispatch({ type: "LOAD_FILTER_PRODUCTS", payload: products });
   }, [products]);
 
   return (
-    <FilterContext.Provider value={{ ...state, setDisplayView, sorting }}>
+    <FilterContext.Provider
+      value={{ ...state, setDisplayView, sorting, updateFilterValue }}
+    >
       {children}
     </FilterContext.Provider>
   );

@@ -44,6 +44,31 @@ const filterReducer = (state, action) => {
         filter_products: newSortData,
       };
 
+    case "UPDATE_FILTER_SEARCH_VALUE":
+      const { name, value } = action.payload;
+      return {
+        ...state,
+        filters: {
+          ...state.filters,
+          [name]: value,
+        },
+      };
+
+    case "SEARCH_PRODUCTS":
+      let { all_products } = state;
+      let tempAllProducts = [...all_products];
+
+      const { text } = state.filters;
+      if (text) {
+        tempAllProducts = tempAllProducts.filter((item) => {
+          return item.name.toLowerCase().includes(text);
+        });
+      }
+      return {
+        ...state,
+        filter_products: tempAllProducts,
+      };
+
     default:
       return state;
   }
