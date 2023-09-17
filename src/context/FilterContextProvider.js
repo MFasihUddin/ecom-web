@@ -11,6 +11,8 @@ const initialVal = {
   sorting_value: "lowest",
   filters: {
     text: "",
+    category: "all",
+    company: "all",
   },
 };
 
@@ -52,7 +54,12 @@ function FilterContextProvider({ children }) {
 
   return (
     <FilterContext.Provider
-      value={{ ...state, setDisplayView, sorting, updateFilterValue }}
+      value={{
+        ...state,
+        setDisplayView,
+        sorting,
+        updateFilterValue,
+      }}
     >
       {children}
     </FilterContext.Provider>

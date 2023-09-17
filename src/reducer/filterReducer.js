@@ -58,12 +58,37 @@ const filterReducer = (state, action) => {
       let { all_products } = state;
       let tempAllProducts = [...all_products];
 
-      const { text } = state.filters;
+      const { text, category, company } = state.filters;
+
       if (text) {
-        tempAllProducts = tempAllProducts.filter((item) => {
-          return item.name.toLowerCase().includes(text);
-        });
+        tempAllProducts = tempAllProducts.filter((item) =>
+          item.name.toLowerCase().includes(text)
+        );
       }
+
+      if (category) {
+        tempAllProducts = tempAllProducts.filter(
+          (item) => item.category === category
+        );
+      }
+
+      // if (company) {
+      //   tempAllProducts = tempAllProducts.filter(
+      //     (item) => item.company.toLowerCase() === company.toLowerCase()
+      //   );
+      // }
+
+      // if (category) {
+      //   tempAllProducts = tempAllProducts.filter(
+      //     (item) => item.category === category
+      //   );
+      // }
+
+      // if (company) {
+      //   tempAllProducts = tempAllProducts.filter(
+      //     (item) => item.company.toLowerCase() === company.toLowerCase()
+      //   );
+      // }
       return {
         ...state,
         filter_products: tempAllProducts,

@@ -5,7 +5,21 @@ function FilterSection() {
   const {
     filters: { text },
     updateFilterValue,
+    all_products,
   } = useFilterContext();
+
+  const getUniqueData = (data, property) => {
+    let newVal = data.map((item) => item[property]);
+    return (newVal = ["All", ...new Set(newVal)]);
+  };
+  const onlyCategoryData = getUniqueData(all_products, "category");
+
+  const getCompanyData = (data, property) => {
+    let newData = data.map((item) => item[property]);
+    return (newData = ["All", ...new Set(newData)]);
+  };
+
+  const onlyCompanyData = getCompanyData(all_products, "company");
 
   return (
     <Wrapper>
@@ -18,6 +32,41 @@ function FilterSection() {
             value={text}
             onChange={updateFilterValue}
           />
+        </form>
+      </div>
+
+      <div className="filter-category">
+        <h3>Category</h3>
+        <div>
+          {onlyCategoryData.map((item, index) => (
+            <button
+              type="button"
+              key={index}
+              name="category"
+              value={item}
+              onClick={updateFilterValue}
+            >
+              {item}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div className="filter-company">
+        <h3>Company</h3>
+        <form action="#">
+          <select
+            name="company"
+            id="company"
+            className="filter-company--select"
+            onClick={updateFilterValue}
+          >
+            {onlyCompanyData.map((item, index) => (
+              <option key={index} name="company" value={item}>
+                {item}
+              </option>
+            ))}
+          </select>
         </form>
       </div>
     </Wrapper>
