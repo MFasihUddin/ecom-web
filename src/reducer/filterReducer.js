@@ -66,29 +66,18 @@ const filterReducer = (state, action) => {
         );
       }
 
-      if (category) {
+      if (category.toLowerCase() !== "all") {
         tempAllProducts = tempAllProducts.filter(
           (item) => item.category === category
         );
       }
 
-      // if (company) {
-      //   tempAllProducts = tempAllProducts.filter(
-      //     (item) => item.company.toLowerCase() === company.toLowerCase()
-      //   );
-      // }
+      if (company.toLowerCase() !== "all") {
+        tempAllProducts = tempAllProducts.filter(
+          (item) => item.company.toLowerCase() === company.toLowerCase()
+        );
+      }
 
-      // if (category) {
-      //   tempAllProducts = tempAllProducts.filter(
-      //     (item) => item.category === category
-      //   );
-      // }
-
-      // if (company) {
-      //   tempAllProducts = tempAllProducts.filter(
-      //     (item) => item.company.toLowerCase() === company.toLowerCase()
-      //   );
-      // }
       return {
         ...state,
         filter_products: tempAllProducts,
