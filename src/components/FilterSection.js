@@ -10,16 +10,17 @@ function FilterSection() {
 
   const getUniqueData = (data, property) => {
     let newVal = data.map((item) => item[property]);
-    return (newVal = ["All", ...new Set(newVal)]);
+
+    if (property === "colors") {
+      return [...new Set([].concat(...newVal))];
+    } else {
+      return (newVal = ["All", ...new Set(newVal)]);
+    }
   };
+
   const onlyCategoryData = getUniqueData(all_products, "category");
-
-  const getCompanyData = (data, property) => {
-    let newData = data.map((item) => item[property]);
-    return (newData = ["All", ...new Set(newData)]);
-  };
-
-  const onlyCompanyData = getCompanyData(all_products, "company");
+  const onlyCompanyData = getUniqueData(all_products, "company");
+  const onlyColorData = getUniqueData(all_products, "colors");
 
   return (
     <Wrapper>
