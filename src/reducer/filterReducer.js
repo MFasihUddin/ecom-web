@@ -58,7 +58,7 @@ const filterReducer = (state, action) => {
       let { all_products } = state;
       let tempAllProducts = [...all_products];
 
-      const { text, category, company } = state.filters;
+      const { text, category, company, color } = state.filters;
 
       if (text) {
         tempAllProducts = tempAllProducts.filter((item) =>
@@ -75,6 +75,12 @@ const filterReducer = (state, action) => {
       if (company.toLowerCase() !== "all") {
         tempAllProducts = tempAllProducts.filter(
           (item) => item.company.toLowerCase() === company.toLowerCase()
+        );
+      }
+
+      if (color !== "all") {
+        tempAllProducts = tempAllProducts.filter((curr_color) =>
+          curr_color.colors.includes(color)
         );
       }
 

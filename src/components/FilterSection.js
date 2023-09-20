@@ -1,9 +1,10 @@
 import styled from "styled-components";
 import { useFilterContext } from "../context/FilterContextProvider";
+import { FaCheck } from "react-icons/fa";
 
 function FilterSection() {
   const {
-    filters: { text },
+    filters: { text, color },
     updateFilterValue,
     all_products,
   } = useFilterContext();
@@ -12,10 +13,10 @@ function FilterSection() {
     let newVal = data.map((item) => item[property]);
 
     if (property === "colors") {
-      return [...new Set([].concat(...newVal))];
-    } else {
-      return (newVal = ["All", ...new Set(newVal)]);
+      // return (newVal = ["All", ...new Set([].concat(...newVal))]);
+      newVal = newVal.flat();
     }
+    return (newVal = ["all", ...new Set(newVal)]);
   };
 
   const onlyCategoryData = getUniqueData(all_products, "category");
@@ -69,6 +70,46 @@ function FilterSection() {
             ))}
           </select>
         </form>
+      </div>
+      <div className="filter-colors colors">
+        <h3>Colors</h3>
+        <div className="filter-style">
+          {onlyColorData.map((curr_color, index) => {
+            console.log("Selected Color....", color);
+            console.log("color...", curr_color);
+            if (curr_color === "all") {
+              return (
+                <button
+                  key={index}
+                  type="button"
+                  name="color"
+                  value={curr_color}
+                  className="color-all--style"
+                  onClick={updateFilterValue}
+                >
+                  All
+                </button>
+              );
+            }
+            return (
+              <button
+                key={index}
+                type="button"
+                name="color"
+                value={curr_color}
+                style={{ backgroundColor: curr_color }}
+                className={
+                  curr_color === color ? "btnStyle active" : "btnStyle"
+                }
+                onClick={updateFilterValue}
+              >
+                {color === curr_color ? (
+                  <FaCheck className="checkStyle" />
+                ) : null}
+              </button>
+            );
+          })}
+        </div>
       </div>
     </Wrapper>
   );
