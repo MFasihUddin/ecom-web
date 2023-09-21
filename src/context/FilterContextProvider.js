@@ -14,6 +14,9 @@ const initialVal = {
     category: "all",
     company: "all",
     color: "all",
+    price: 0,
+    max_price: 0,
+    min_price: 0,
   },
 };
 

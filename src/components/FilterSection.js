@@ -22,6 +22,8 @@ function FilterSection() {
   const onlyCategoryData = getUniqueData(all_products, "category");
   const onlyCompanyData = getUniqueData(all_products, "company");
   const onlyColorData = getUniqueData(all_products, "colors");
+  const onlyPriceData = getUniqueData(all_products, "price");
+  // console.log(onlyPriceData);
 
   return (
     <Wrapper>
@@ -75,8 +77,6 @@ function FilterSection() {
         <h3>Colors</h3>
         <div className="filter-style">
           {onlyColorData.map((curr_color, index) => {
-            console.log("Selected Color....", color);
-            console.log("color...", curr_color);
             if (curr_color === "all") {
               return (
                 <button
@@ -110,6 +110,10 @@ function FilterSection() {
             );
           })}
         </div>
+      </div>
+      <div className='filter_price'>
+        <h3>Price</h3>
+
       </div>
     </Wrapper>
   );
