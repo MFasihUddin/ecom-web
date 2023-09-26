@@ -46,6 +46,9 @@ function FilterContextProvider({ children }) {
     });
   };
 
+  //clearFilters
+  const clearFilters = () => dispatch({ type: "CLEAR_FILTERS" });
+
   //sorting api call
   useEffect(() => {
     dispatch({ type: "SEARCH_PRODUCTS" });
@@ -63,6 +66,7 @@ function FilterContextProvider({ children }) {
         setDisplayView,
         sorting,
         updateFilterValue,
+        clearFilters,
       }}
     >
       {children}

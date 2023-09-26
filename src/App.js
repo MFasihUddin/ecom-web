@@ -13,6 +13,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { ProductProvider } from "./context/ProductProvider";
 import { FilterContextProvider } from "./context/FilterContextProvider";
+import { CartProvider } from "./context/CartProvider";
 
 const App = () => {
   const theme = {
@@ -43,20 +44,22 @@ const App = () => {
     <ProductProvider>
       <FilterContextProvider>
         <ThemeProvider theme={theme}>
-          <Router>
-            <GlobalStyle />
-            <Header />
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/products" element={<Products />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/singleProduct/:id" element={<SingleProduct />} />
-              <Route path="/cart" element={<Cart />} />
-              <Route path="*" element={<Error />} />
-            </Routes>
-            <Footer />
-          </Router>
+          <CartProvider>
+            <Router>
+              <GlobalStyle />
+              <Header />
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/products" element={<Products />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/singleProduct/:id" element={<SingleProduct />} />
+                <Route path="/cart" element={<Cart />} />
+                <Route path="*" element={<Error />} />
+              </Routes>
+              <Footer />
+            </Router>
+          </CartProvider>
         </ThemeProvider>
       </FilterContextProvider>
     </ProductProvider>
