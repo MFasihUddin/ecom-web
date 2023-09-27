@@ -1,30 +1,43 @@
 import styled from "styled-components";
 import { useCartContext } from "./context/CartProvider";
 import CartItem from "./components/CartItem";
+import { NavLink } from "react-router-dom";
+import { Button } from "./styles/Button";
 
 const Cart = () => {
-  const { cart } = useCartContext();
+  const { cart, clearCart } = useCartContext();
+  console.log(cart);
+  if (cart !== "[]")
+    return (
+      <Wrapper>
+        <div className="container">
+          <div className="cart_heading grid grid-five-column">
+            <p>Item</p>
+            <p className="cart-hide">Price</p>
+            <p>Quality</p>
+            <p className="cart-hide">Subtotal</p>
+            <p>Remove</p>
+          </div>
+          <hr />
 
-  return (
-    <Wrapper>
-      <div className="container">
-        <div className="cart_heading grid grid-five-column">
-          <p>Item</p>
-          <p className="cart-hide">Price</p>
-          <p>Quality</p>
-          <p className="cart-hide">Subtotal</p>
-          <p>Remove</p>
-        </div>
-        <hr />
+          <div className="cart-item">
+            {cart.map((item) => (
+              <CartItem key={item.id} {...item} />
+            ))}
+          </div>
+          <hr />
+          <div className="cart-two-button">
+            <NavLink to="/product">
+              <Button>Continue to Shopping</Button>
+            </NavLink>
 
-        <div className="cart-item">
-          {cart.map((item) => (
-            <CartItem key={item.id} {...item} />
-          ))}
+            <Button onClick={clearCart}>Clear Cart</Button>
+          </div>
         </div>
-      </div>
-    </Wrapper>
-  );
+      </Wrapper>
+    );
+
+  return <h1>No Item In Cart</h1>;
 };
 
 const Wrapper = styled.section`

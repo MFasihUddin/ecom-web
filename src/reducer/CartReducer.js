@@ -11,11 +11,21 @@ const CartReducer = (state, action) => {
         price: product.price,
         max: product.stock,
       };
-
       return {
         ...state,
         cart: [...state.cart, cart_Product],
       };
+
+    case "REMOVE_ITEM":
+      const item_Id = action.payload;
+      let updated_array = state.cart.filter((item) => item.id !== item_Id);
+      console.log(updated_array);
+      return {
+        ...state,
+        cart: updated_array,
+      };
+    default:
+      return state;
   }
 };
 
