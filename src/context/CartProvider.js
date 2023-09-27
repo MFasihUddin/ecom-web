@@ -38,10 +38,14 @@ function CartProvider({ children }) {
   }, [state.cart]);
 
   //clear Cart Item
-  const clearCart = () => {};
+  const clearCart = () => {
+    dispatch({ type: "CLEAR_CART" });
+  };
 
   return (
-    <CartContext.Provider value={{ ...state, addToCart, removeItem }}>
+    <CartContext.Provider
+      value={{ ...state, addToCart, removeItem, clearCart }}
+    >
       {children}
     </CartContext.Provider>
   );

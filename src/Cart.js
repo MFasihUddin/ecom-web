@@ -7,38 +7,59 @@ import { Button } from "./styles/Button";
 const Cart = () => {
   const { cart, clearCart } = useCartContext();
   console.log(cart);
-  if (cart !== "[]")
+  if (cart.length === 0) {
     return (
-      <Wrapper>
-        <div className="container">
-          <div className="cart_heading grid grid-five-column">
-            <p>Item</p>
-            <p className="cart-hide">Price</p>
-            <p>Quality</p>
-            <p className="cart-hide">Subtotal</p>
-            <p>Remove</p>
-          </div>
-          <hr />
-
-          <div className="cart-item">
-            {cart.map((item) => (
-              <CartItem key={item.id} {...item} />
-            ))}
-          </div>
-          <hr />
-          <div className="cart-two-button">
-            <NavLink to="/product">
-              <Button>Continue to Shopping</Button>
-            </NavLink>
-
-            <Button onClick={clearCart}>Clear Cart</Button>
-          </div>
-        </div>
-      </Wrapper>
+      <EmptyDiv>
+        <h2>No Item In Cart</h2>
+      </EmptyDiv>
     );
+  }
+
+  return (
+    <Wrapper>
+      <div className="container">
+        <div className="cart_heading grid grid-five-column">
+          <p>Item</p>
+          <p className="cart-hide">Price</p>
+          <p>Quality</p>
+          <p className="cart-hide">Subtotal</p>
+          <p>Remove</p>
+        </div>
+        <hr />
+
+        <div className="cart-item">
+          {cart.map((item) => (
+            <CartItem key={item.id} {...item} />
+          ))}
+        </div>
+        <hr />
+        <div className="cart-two-button">
+          <NavLink to="/product">
+            <Button>Continue to Shopping</Button>
+          </NavLink>
+
+          <Button className="btn btn-clear" onClick={clearCart}>
+            Clear Cart
+          </Button>
+        </div>
+      </div>
+    </Wrapper>
+  );
 
   return <h1>No Item In Cart</h1>;
 };
+
+const EmptyDiv = styled.div`
+  display: grid;
+  place-items: center;
+  height: 50vh;
+
+  h2: {
+    font-size: 4.2rem;
+    text-transform: capitalize;
+    font-weight: 300;
+  }
+`;
 
 const Wrapper = styled.section`
   padding: 9rem 0;
