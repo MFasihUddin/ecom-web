@@ -6,7 +6,6 @@ import { Button } from "./styles/Button";
 
 const Cart = () => {
   const { cart, clearCart } = useCartContext();
-  console.log(cart);
   if (cart.length === 0) {
     return (
       <EmptyDiv>
@@ -34,7 +33,7 @@ const Cart = () => {
         </div>
         <hr />
         <div className="cart-two-button">
-          <NavLink to="/product">
+          <NavLink to="/products">
             <Button>Continue to Shopping</Button>
           </NavLink>
 
