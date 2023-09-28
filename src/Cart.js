@@ -44,8 +44,6 @@ const Cart = () => {
       </div>
     </Wrapper>
   );
-
-  return <h1>No Item In Cart</h1>;
 };
 
 const EmptyDiv = styled.div`
