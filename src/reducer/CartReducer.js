@@ -4,7 +4,6 @@ const CartReducer = (state, action) => {
       const { id, color, amount, product } = action.payload;
 
       let exsistingProduct = state.cart.find((item) => item.id === id + color);
-      console.log(exsistingProduct);
 
       if (exsistingProduct) {
         let updatedProduct = state.cart.map((item) => {
@@ -53,7 +52,6 @@ const CartReducer = (state, action) => {
       };
 
     case "SET_DECREMENT":
-      console.log(action.payload);
       let updatedProduct = state.cart.map((item) => {
         if (item.id === action.payload) {
           let decAmount = item.amount > 1 ? item.amount - 1 : 1;
@@ -71,10 +69,9 @@ const CartReducer = (state, action) => {
       };
 
     case "SET_INCREMENT":
-      console.log(action.payload);
       let updatedItem = state.cart.map((item) => {
         if (item.id === action.payload) {
-          let incAmount = item.amount + 1;
+          let incAmount = item.amount < item.max ? item.amount + 1 : item.max;
           return {
             ...item,
             amount: incAmount,
@@ -87,6 +84,53 @@ const CartReducer = (state, action) => {
       return {
         ...state,
         cart: updatedItem,
+      };
+
+    // case "Total_ITEM":
+    //   let updateTotalAmount = state.cart.reduce((initialVal, curItem) => {
+    //     const { amount } = curItem;
+
+    //     initialVal = initialVal + amount;
+    //     return initialVal;
+    //   }, 0);
+
+    //   return {
+    //     ...state,
+    //     total_item: updateTotalAmount,
+    //   };
+
+    // case "Cart_Total_Price":
+    //   let total_price = state.cart.reduce((initialVal, curItem) => {
+    //     let { price, amount } = curItem;
+
+    //     initialVal = initialVal + price * amount;
+    //     return initialVal;
+    //   }, 0);
+
+    //   return {
+    //     ...state,
+    //     total_price: total_price,
+    //   };
+
+    case "CART_ITEM_AND_PRICE_TOTAL":
+      let { total_item, total_price } = state.cart.reduce(
+        (accum, curItem) => {
+          const { amount, price } = curItem;
+
+          accum.total_item += amount;
+          accum.total_price += price * amount;
+
+          return accum;
+        },
+        {
+          total_item: 0,
+          total_price: 0,
+        }
+      );
+      return {
+        ...state,
+        total_item,
+        total_price,
       };
 
     default:
