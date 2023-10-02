@@ -10,7 +10,7 @@ import { Button } from "./../styles/Button";
 const Navbar = () => {
   const [menuIcon, setMenuIcon] = useState();
   const { total_item } = useCartContext();
-  const { loginWithRedirect, logout, isAuthenticated } = useAuth0();
+  const { loginWithRedirect, logout, isAuthenticated, user } = useAuth0();
 
   const Nav = styled.nav`
     .navbar-lists {
@@ -193,6 +193,7 @@ const Navbar = () => {
               Contact
             </NavLink>
           </li>
+          {isAuthenticated && <p>{user.name}</p>}
           {isAuthenticated ? (
             <li>
               <Button
