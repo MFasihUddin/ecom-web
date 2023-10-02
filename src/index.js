@@ -10,10 +10,11 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Auth0Provider
     domain="dev-mub4caqka0cfgrbs.us.auth0.com"
-    clientId="nOn7hVajvLBUEkdR8fs7VkanU4TQNhDq"
-    authorizationParams={{
-      redirect_uri: window.location.origin,
-    }}
+    clientId="MWeSMNk3lcQ3nnKtcBGRHUK2l5JHI9Bn"
+    redirectUri={window.location.origin}
+    // authorizationParams={{
+    //   redirect_uri: window.location.origin,
+    // }}
   >
     <App />
   </Auth0Provider>
