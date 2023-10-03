@@ -9,27 +9,16 @@ import PriceFormat from "./Helper/PriceFormat";
 import { MdSecurity } from "react-icons/md";
 import { TbTruckDelivery, TbReplace } from "react-icons/tb";
 import Star from "./components/Star";
-import AddToCart from './components/AddToCart';
+import AddToCart from "./components/AddToCart";
 
 const API = "https://api.pujakaitem.com/api/products";
 
 const SingleProduct = () => {
   const { getSingleProduct, isSingleLoading, singleProduct } = useProductHook();
-
   const { id } = useParams();
 
-  const {
-    id: alias,
-    name,
-    company,
-    price,
-    description,
-    // category,
-    stock,
-    stars,
-    reviews,
-    image,
-  } = singleProduct;
+  const { name, company, price, description, stock, stars, reviews, image } =
+    singleProduct;
 
   useEffect(() => {
     getSingleProduct(`${API}?id=${id}`);
